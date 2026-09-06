@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Activity {
+    int start, finish;
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<Activity> a(n);
+
+    for(auto &x : a)
+        cin >> x.start >> x.finish;
+
+    sort(a.begin(), a.end(),
+         [](Activity x, Activity y) {
+             return x.finish < y.finish;
+         });
+
+    int lastFinish = -1;
+    int count = 0;
+
+    for(auto x : a) {
+
+        if(x.start >= lastFinish) {
+            cout << "(" << x.start << "," << x.finish << ") ";
+            count++;
+
+            lastFinish = x.finish;
+        }
+    }
+
+    cout << "\nMaximum activities = " << count;
+}
